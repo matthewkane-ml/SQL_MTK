@@ -4,8 +4,8 @@
 		"us": "SQL Project: Global Life Institute Data Detectives",
 		"es": "Proyecto SQL: Detectives de Datos del Instituto Global de la Vida"
 	},
-	"preview": "https://github.com/4GeeksAcademy/exploratory-sql-analysis-project/blob/main/assets/preview.png?raw=true",
-	"solution": "https://github.com/4GeeksAcademy/exploratory-sql-analysis-project/blob/main/src/solution.sql",
+	"preview": "https://github.com/matthewkane-ml/SQL_MTK/blob/main/assets/preview.png?raw=true",
+	"solution": "https://github.com/matthewkane-ml/SQL_MTK/blob/main/src/solution.sql",
 	"technologies": ["sql", "mysql", "postgresql", "sqlalchemy", "psycopg2", "pandas", "dotenv", "machine learning", "data science", "back-end", "databases", "python"],
 	"difficulty": "beginner",
 	"syntax": "python",

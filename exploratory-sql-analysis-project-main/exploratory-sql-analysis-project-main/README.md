@@ -20,15 +20,15 @@ Within this repository, you will find a file named `./INSTRUCTIONS.md` with the 
 
 This project comes with the necessary files to start working immediately.
 
-We recommend opening this very same repository using a provisioning tool like [Codespaces](https://4geeks.com/lesson/what-is-github-codespaces) (recommended) or [Gitpod](https://4geeks.com/lesson/how-to-use-gitpod). Alternatively, you can clone it on your local computer using the `git clone` command. 
+You can clone this repository to your local computer using the `git clone` command.
 
-This is the repository you need to fork and open:
+This is the repository:
 
 ```text
-https://github.com/4GeeksAcademy/exploratory-sql-analysis-project
+https://github.com/matthewkane-ml/SQL_MTK
 ```
 
-**👉 Please follow these steps on** [how to start a coding project](https://4geeks.com/lesson/how-to-start-a-project).
+**👉 See the repository at** [matthewkane-ml/SQL_MTK](https://github.com/matthewkane-ml/SQL_MTK).
 
 Once your project and code have finished opening, you can go ahead and open the `./src/sql/queries.sql` file and start solving each exercise inside the notebook.
 
@@ -52,7 +52,7 @@ Based on your analysis, write one or two sentences summarizing what you discover
 
 ## 🚛 How to deliver this project
 
-Once you have finished solving the exercises, be sure to commit your changes, push them to your repository, and go to 4Geeks.com to upload the repository link.
+Once you have finished solving the exercises, be sure to commit your changes and push them to your repository.
 
 ## Solutions
 
