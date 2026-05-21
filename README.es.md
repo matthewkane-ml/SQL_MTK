@@ -1,61 +1,74 @@
-<!-- hide -->
-# Proyecto SQL: Detectives de Datos del Instituto Global de la Vida 
-<!-- endhide -->
+# Análisis Exploratorio con SQL — Base de Datos de Biodiversidad
 
-> ¿Has terminado los ejercicios interactivos de SQL Bolt? Te recomendamos encarecidamente hacerlos antes de continuar con este proyecto.
+> 15 misiones SQL en cuatro niveles de dificultad, trabajando en una base de datos SQLite del mundo real con observaciones de fauna global extraídas del portal de biodiversidad GBIF — ejecutadas con Python y mostradas como DataFrames de pandas.
 
-Esto es lo que aprenderas con el proyecto:
+---
 
-- Usa una base de datos ya preparada con datos cargados previamente.
-- Ejecuta sentencias SQL para explorar y analizar datos en un escenario basado en biodiversidad y cambio climático.
-- Practica cómo insertar, actualizar y eliminar datos relevantes, como parte de una simulación de mantenimiento de calidad de datos.
-- Usa SQL Alchemy, la biblioteca más popular de la industria para conectarse a bases de datos SQL.
-- Usa Pandas para mostrar los resultados de tus consultas como DataFrames.
+## Problema
 
-Dentro de este repositorio encontrarás un archivo llamado `./INSTRUCTIONS.es.md` con los pasos necesarios para completarlo.
+Los datos crudos almacenados en una base de datos solo son útiles si puedes hacerles preguntas. Este proyecto pone esa habilidad en práctica con un escenario realista: el ficticio **Instituto Global de la Vida (GIL)**, un centro de monitoreo de biodiversidad que registra observaciones de especies en docenas de regiones de todo el mundo. El objetivo es responder preguntas analíticas progresivamente más difíciles usando SQL puro — desde filtrado básico hasta agregaciones con JOIN entre múltiples tablas.
 
+## Dataset
 
-<how-to-start>
-  
-## 🌱 Cómo comenzar este proyecto
+- **Fuente:** [GBIF – Global Biodiversity Information Facility](https://www.gbif.org/occurrence) (muestra)
+- **Base de datos:** SQLite (`data/database.db`), construida con `src/sql/create.sql` + `src/sql/insert.sql`
+- **Tablas:**
 
-Este proyecto viene con los archivos necesarios para comenzar a trabajar de inmediato.
+| Tabla | Descripción |
+|---|---|
+| `regions` | 40+ regiones geográficas (Australia, Argentina, Uganda, Canadá, Noruega y más) |
+| `species` | Registros de especies con nombre científico, nombre común, género, familia, orden |
+| `observations` | Avistamientos individuales: especie, región, observador, fecha, coordenadas, cantidad |
+| `climate` | Datos climáticos por región: temperatura media, precipitación |
 
-Puedes clonar este repositorio en tu computadora local usando el comando `git clone`.
+## Misiones (15 en total)
 
-Este es el repositorio:
+### Nivel 1 — Exploración Básica (SELECT, LIMIT, DISTINCT, WHERE)
+1. Primeras 10 observaciones registradas
+2. Valores distintos de `region_id` en el dataset
+3. Conteo de especies distintas observadas
+4. Observaciones para `region_id = 2`
+5. Observaciones registradas en una fecha específica
 
-```text
-https://github.com/matthewkane-ml/SQL_MTK
+### Nivel 2 — Agregación y Ordenación (GROUP BY, COUNT, ORDER BY, HAVING)
+6. Región con más observaciones
+7. Top 5 de especies más observadas
+8. Especies con menos de 5 registros (avistamientos raros)
+9. Observadores más activos por número de registros
+
+### Nivel 3 — Relaciones entre Tablas (JOIN)
+10. Registros de observaciones con nombres de región
+11. Registros de observaciones con nombres científicos de especies
+12. Especie más observada por región (GROUP BY + ORDER BY en dos tablas)
+
+### Nivel 4 — Manipulación de Datos (INSERT, UPDATE, DELETE — opcional)
+13. Insertar un registro de observación de prueba
+14. Corregir un nombre científico con error tipográfico (`Panthera oncca` → `Panthera onca`)
+15. Eliminar una observación específica por ID
+
+## Cómo Funciona
+
+Las consultas se escriben en `src/sql/queries.sql`. Ejecutar `python src/app.py` lanza cada consulta y muestra los resultados como DataFrames de pandas formateados en la terminal.
+
+```bash
+git clone https://github.com/matthewkane-ml/SQL_MTK.git
+cd SQL_MTK
+pip install -r requirements.txt
+python src/app.py
 ```
 
-**👉 Ve el repositorio en** [matthewkane-ml/SQL_MTK](https://github.com/matthewkane-ml/SQL_MTK).
+La solución completa a las 15 misiones está en `src/solution.sql`.
 
-Una vez que haya terminado de abrir, puedes abrir el archivo `./src/sql/queries.sql` y comenzar a resolver.
+## Stack Tecnológico
 
-</how-to-start>
+`Python` · `SQLite` · `SQLAlchemy` · `pandas`
 
-## 🚀 Haz visible tu trabajo
+## Próximos Pasos
 
-Uno de los principales objetivos de este proyecto es que puedas mostrar habilidades reales y aplicadas en tu perfil profesional. Trabajaste con datos abiertos reales del portal [GBIF](https://www.gbif.org/), ejecutaste consultas SQL, analizaste biodiversidad y visualizaste patrones valiosos.
+- Visualizar los resultados de las consultas con Matplotlib — por ejemplo, un mapa de densidad de observaciones por región usando coordenadas de latitud/longitud
+- Añadir índices en `observations(species_id)` y `observations(region_id)` para entender cómo la indexación acelera las consultas GROUP BY en tablas grandes
+- Migrar de SQLite a PostgreSQL y practicar funciones de ventana (`RANK()`, `ROW_NUMBER()`, `LAG()`) para análisis de tendencias en series temporales
 
-Publica un insight en LinkedIn que demuestre pensamiento analítico basado en datos reales.
+---
 
-### ¿Qué compartir?
-Con base en tu análisis, redactauna o dos frases que sinteticen lo que descubriste. El objetivo es comunicar tu hallazgo de forma objetiva, breve y con respaldo en los datos. Suma un gráfico si quieres, y usa hashtags para amplificar tu alcance.
-
-### ✨ Ejemplos posteables
-
-> **"Las 5 especies más observadas en mi region [Buenos Aires] representan el 27% del total de registros en esa zona. Su presencia dominante podría indicar hábitos adaptativos únicos. 🐦📍 #Biodiversidad #DataScience"**
-
-> **"New South Wales (Australia) lidera en diversidad con más de 120 especies distintas registradas. ¡Los datos reales de GBIF revelan hotspots inesperados de biodiversidad! 🌿🌏 #SQL #OpenData"**
-
-
-## 🚛 Cómo entregar este proyecto
-
-Una vez que hayas terminado de resolver los ejercicios, asegúrate de confirmar tus cambios y haz push a tu repositorio.
-
-## Soluciones
-
-También incorporamos muestras de solución en `./src/solution.py` que te sugerimos que solo uses si estás atascado por más de 30 minutos o si ya has terminado y quieres compararlo con tu enfoque. 
-
+**Autor:** Matthew Kane — [LinkedIn](https://www.linkedin.com/in/thomas-k-392094410/) · [Portafolio GitHub](https://github.com/matthewkane-ml)

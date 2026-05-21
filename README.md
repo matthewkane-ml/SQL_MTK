@@ -1,59 +1,74 @@
-<!-- hide -->
-# SQL Project: Global Life Institute Data Detectives
-<!-- endhide -->
+# SQL Exploratory Analysis — Wildlife Biodiversity Database
 
-> Have you finished the SQL Bolt interactive exercises? We strongly recommend doing them before moving forward with this project.
+> 15 SQL missions across four levels of difficulty, working on a real-world SQLite database of global wildlife observations sourced from the GBIF biodiversity portal — run via Python and displayed as pandas DataFrames.
 
-This is what you will learn during this project:
+---
 
-- Use a preloaded database with pre-existing data.
-- Execute SQL statements to explore and analyze data in a biodiversity and climate change scenario.
-- Practice inserting, updating, and deleting relevant data as part of a data quality maintenance simulation.
-- Use SQL Alchemy, the industry's most popular library for connecting to SQL databases.
-- Use Pandas to display the results of your queries as DataFrames.
+## Problem
 
-Within this repository, you will find a file named `./INSTRUCTIONS.md` with the necessary steps to complete it.
+Raw data sitting in a database is only useful if you can ask questions of it. This project puts that skill to work in a realistic scenario: the fictional **Global Institute of Life (GIL)**, a biodiversity monitoring centre that tracks species observations across dozens of regions worldwide. The goal is to answer progressively harder analytical questions using pure SQL — from basic filtering to multi-table JOIN aggregations.
 
-<how-to-start>
-  
-## 🌱 How to start this project
+## Dataset
 
-This project comes with the necessary files to start working immediately.
+- **Source:** [GBIF – Global Biodiversity Information Facility](https://www.gbif.org/occurrence) (sample)
+- **Database:** SQLite (`data/database.db`), built from `src/sql/create.sql` + `src/sql/insert.sql`
+- **Tables:**
 
-You can clone this repository to your local computer using the `git clone` command.
+| Table | Description |
+|---|---|
+| `regions` | 40+ geographic regions (Australia, Argentina, Uganda, Canada, Norway, and more) |
+| `species` | Species records with scientific name, common name, genus, family, order |
+| `observations` | Individual sightings: species, region, observer, date, coordinates, count |
+| `climate` | Climate data per region: avg temperature, precipitation |
 
-This is the repository:
+## Missions (15 total)
 
-```text
-https://github.com/matthewkane-ml/SQL_MTK
+### Level 1 — Basic Exploration (SELECT, LIMIT, DISTINCT, WHERE)
+1. First 10 recorded observations
+2. Distinct `region_id` values in the dataset
+3. Count of distinct species observed
+4. Observations for `region_id = 2`
+5. Observations recorded on a specific date
+
+### Level 2 — Aggregation & Ordering (GROUP BY, COUNT, ORDER BY, HAVING)
+6. Region with the most observations
+7. Top 5 most frequently observed species
+8. Species with fewer than 5 records (rare sightings)
+9. Most active observers by record count
+
+### Level 3 — Cross-Table Relationships (JOIN)
+10. Observation records joined with region names
+11. Observation records joined with species scientific names
+12. Most observed species per region (two-table GROUP BY + ORDER BY)
+
+### Level 4 — Data Manipulation (INSERT, UPDATE, DELETE — optional)
+13. Insert a test observation record
+14. Correct a scientific name with a typo (`Panthera oncca` → `Panthera onca`)
+15. Delete a specific observation by ID
+
+## How It Works
+
+Queries are written in `src/sql/queries.sql`. Running `python src/app.py` executes every query and prints the results as formatted pandas DataFrames in the terminal.
+
+```bash
+git clone https://github.com/matthewkane-ml/SQL_MTK.git
+cd SQL_MTK
+pip install -r requirements.txt
+python src/app.py
 ```
 
-**👉 See the repository at** [matthewkane-ml/SQL_MTK](https://github.com/matthewkane-ml/SQL_MTK).
+The solution to all 15 missions is in `src/solution.sql`.
 
-Once your project and code have finished opening, you can go ahead and open the `./src/sql/queries.sql` file and start solving each exercise inside the notebook.
+## Tech Stack
 
-</how-to-start>
+`Python` · `SQLite` · `SQLAlchemy` · `pandas`
 
-## 🚀 Make Your Work Visible
+## What I'd Do Next
 
-One of the main goals of this project is to showcase real and applied skills on your professional profile. You worked with real open data from the [GBIF](https://www.gbif.org/) portal, executed SQL queries, analyzed biodiversity, and visualized valuable patterns.
+- Visualize query results with Matplotlib — e.g., a map of observation density by region using latitude/longitude coordinates
+- Add indexes on `observations(species_id)` and `observations(region_id)` to understand how indexing accelerates GROUP BY queries on large tables
+- Migrate from SQLite to PostgreSQL and practise window functions (`RANK()`, `ROW_NUMBER()`, `LAG()`) for time-series trend analysis
 
-Publish an insight on LinkedIn that demonstrates analytical thinking based on real data.
+---
 
-### What to Share?
-Based on your analysis, write one or two sentences summarizing what you discovered. The goal is to communicate your findings objectively, briefly, and backed by data. Add a chart if you like, and use hashtags to amplify your reach.
-
-### ✨ Postable Examples
-
-> **"The top 5 most observed species in my region [Buenos Aires] account for 27% of the total records in that area. Their dominant presence might indicate unique adaptive habits. 🐦📍 #Biodiversity #DataScience"**
-
-> **"New South Wales (Australia) leads in diversity with over 120 distinct species recorded. Real GBIF data reveals unexpected biodiversity hotspots! 🌿🌏 #SQL #OpenData"**
-
-
-## 🚛 How to deliver this project
-
-Once you have finished solving the exercises, be sure to commit your changes and push them to your repository.
-
-## Solutions
-
-We also incorporated the solution samples in `./src/solution.py` that we strongly suggest you only use if you are stuck for more than 30 minutes or if you have already finished and want to compare it with your approach.
+**Author:** Matthew Kane — [LinkedIn](https://www.linkedin.com/in/thomas-k-392094410/) · [GitHub portfolio](https://github.com/matthewkane-ml)
